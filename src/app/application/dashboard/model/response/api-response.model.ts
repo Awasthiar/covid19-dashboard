@@ -1,34 +1,30 @@
 
 export class ApiResponseModel {
-    data: CovidApiResponseSummaryModel[] = [];
-}
-
-export class CovidApiResponseSummaryModel{
-    global?: GlobalSummaryModel;
-    countries?: CountryWiseSummaryModel[];
+    Global?: GlobalSummaryModel;
+    Countries?: CountrySummaryDataModel[];
 }
 
 export class GlobalSummaryModel{
-    newConfirmed?: string;
-    totalConfirmed?: string;
-    newDeaths?: string;
-    totalDeaths?: string;
-    newRecovered?: string;
-    totalRecovered?: string;
-    date?: string
+    NewConfirmed?: string;
+    TotalConfirmed?: string;
+    NewDeaths?: string;
+    TotalDeaths?: string;
+    NewRecovered?: string;
+    TotalRecovered?: string;
+    Date?: string
 }
 
 export class CountryWiseSummaryModel{
-    countrySummary?: CountrySummaryDataModel;
+    CountrySummary: CountrySummaryDataModel;
 }
 
 export class CountrySummaryDataModel{
-    country?: string;
-    newConfirmed?: string;
-    totalConfirmed?: string;
-    newDeaths?: string;
-    totalDeaths?: string;
-    newRecovered?: string;
-    totalRecovered?: string;
-    date?: string
+    Country?: string;
+    NewConfirmed?: string;
+    TotalConfirmed?: string;
+    NewDeaths?: string;
+    TotalDeaths?: string;
+    NewRecovered?: string;
+    TotalRecovered?: string;
+    Date?: string
 }

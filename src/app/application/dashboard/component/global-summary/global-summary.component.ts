@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { GlobalSummaryModel } from "../../model/response/api-response.model";
 
 @Component({
     selector: 'global-summary-dashboard',
@@ -8,8 +9,17 @@ import { Component, OnInit } from "@angular/core";
 
 export class GlobalSummaryComponent implements OnInit {
 
-    ngOnInit(){
-        
+   
+    @Input() globalSummary: GlobalSummaryModel;
+    showGlobalSummary: boolean = false;
+
+    ngOnInit(){        
+    }
+
+    ngOnChanges(){      
+      if(this.globalSummary !=undefined){
+        this.showGlobalSummary = true;
+      }
     }
 
 }

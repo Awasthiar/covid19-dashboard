@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { CountrySummaryDataModel } from "../../model/response/api-response.model";
 
 @Component({
     selector: 'country-summary-dashboard',
@@ -8,8 +9,16 @@ import { Component, OnInit } from "@angular/core";
 
 export class CountrySummaryComponent implements OnInit {
 
+    @Input() countryData: CountrySummaryDataModel;
+    showCountryData: boolean = false;
+
     ngOnInit(){
         
     }
 
+    ngOnChanges(){
+        if(this.countryData){            
+            this.showCountryData = true
+        }
+    }
 }
