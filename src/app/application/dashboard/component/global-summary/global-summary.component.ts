@@ -10,16 +10,8 @@ import { GlobalSummaryModel } from "../../model/response/api-response.model";
 export class GlobalSummaryComponent implements OnInit {
 
    
-    @Input() globalSummary: GlobalSummaryModel;
-    showGlobalSummary: boolean = false;
+    @Input() summaryCard:{title:string, value: any, color: any};
 
     ngOnInit(){        
     }
-
-    ngOnChanges(){      
-      if(this.globalSummary !=undefined){
-        this.showGlobalSummary = true;
-      }
-    }
-
 }

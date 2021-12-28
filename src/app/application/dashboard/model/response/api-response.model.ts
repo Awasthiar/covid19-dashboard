@@ -19,12 +19,13 @@ export class CountryWiseSummaryModel{
 }
 
 export class CountrySummaryDataModel{
-    Country?: string;
-    NewConfirmed?: string;
-    TotalConfirmed?: string;
-    NewDeaths?: string;
-    TotalDeaths?: string;
-    NewRecovered?: string;
-    TotalRecovered?: string;
-    Date?: string
+    Country: string;
+    CountryCode: string;
+    NewConfirmed: string;
+    TotalConfirmed: string;
+    NewDeaths: string;
+    TotalDeaths: string;
+    NewRecovered: string;
+    TotalRecovered: string;
+    Date: string
 }

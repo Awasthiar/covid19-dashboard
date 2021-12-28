@@ -1,5 +1,9 @@
-global-summary
-<p *ngIf="showGlobalSummary">abc
-{{globalSummary?.TotalConfirmed}}
-</p>
-<!-- <p *ngIf="showGlobalSummary">{{globalSummary.totalConfirmed}}</p> -->
+<div class="card box-shadow">
+    <div class="card-body text-center">
+      <h6 class="text-center font-weight-bold">{{ summaryCard?.title }}</h6>
+      <h3 class="card-text font-weight-bold" [style.color]="summaryCard?.color">
+        {{ summaryCard?.value }}
+      </h3>
+    </div>
+  </div>
+  
