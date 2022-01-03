@@ -1,75 +1,106 @@
-
-<mat-form-field>
-  <input matInput floatPlaceholder="never" color="accent" [formControl]="filter" placeholder="Filter Country" #input>
+<mat-form-field appearance="outline">
+  <input
+    matInput
+    color="accent"
+    [formControl]="filter"
+    placeholder="Search Country or NewConfirmed or TotalConfirmed or NewDeaths ... "
+    #input
+  />
 </mat-form-field>
 
 <div class="content">
   <div *ngIf="isLoadingResults" class="loading-shade">
-  <mat-spinner class="loading" ></mat-spinner>
+    <mat-spinner class="loading"></mat-spinner>
+  </div>
+
+  <ng-container [class.show]="showCountryData" class="container">
+    <mat-table
+      #table
+      [dataSource]="dataSource"
+      matSort
+      matSortActive="Country"
+      matSortDisableClear
+      matSortDirection="asc"
+      class="mat-cell"
+    >
+      <ng-container matColumnDef="Country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Country</mat-header-cell
+        >
+        <mat-cell *matCellDef="let row"> {{ row.Country }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="NewConfirmed">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >New Confirmed</mat-header-cell
+        >
+        <mat-cell *matCellDef="let row">
+          {{ row.NewConfirmed | number }}</mat-cell
+        >
+      </ng-container>
+
+      <ng-container matColumnDef="TotalConfirmed">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Total Confirmed</mat-header-cell
+        >
+        <mat-cell *matCellDef="let row">
+          {{ row.TotalConfirmed | number }}</mat-cell
+        >
+      </ng-container>
+
+      <ng-container matColumnDef="NewDeaths">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >New Deaths</mat-header-cell
+        >
+        <mat-cell *matCellDef="let row"> {{ row.NewDeaths | number }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="TotalDeaths">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Total Deaths</mat-header-cell
+        >
+        <mat-cell *matCellDef="let row">
+          {{ row.TotalDeaths | number }}</mat-cell
+        >
+      </ng-container>
+
+      <ng-container matColumnDef="NewRecovered">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >New Recovered</mat-header-cell
+        >
+        <mat-cell *matCellDef="let row">
+          {{ row.NewRecovered | number }}</mat-cell
+        >
+      </ng-container>
+
+      <ng-container matColumnDef="TotalRecovered">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Total Recovered</mat-header-cell
+        >
+        <mat-cell *matCellDef="let row">
+          {{ row.TotalRecovered | number }}</mat-cell
+        >
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <div
+      class="no-results"
+      *ngIf="countryData.length < 1 || !searchRecordFound"
+    >
+      No results
+    </div>
+
+    <mat-paginator
+      showFirstLastButtons
+      #paginator
+      [length]="countryData.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[10, 20, 50, 100]"
+    >
+    </mat-paginator>
+  </ng-container>
 </div>
-
-<ng-container [class.show]="showCountryData" class="container">
-  <!-- <div class="form">
-    <mat-form-field floatPlaceholder="never" color="accent">
-      <input matInput #filterRec placeholder="Filter">
-    </mat-form-field>
-  </div> -->
-    <mat-table #table [dataSource]="dataSource" matSort matSortActive="CountryCode" matSortDisableClear matSortDirection="asc" class="mat-cell">
-        <ng-container matColumnDef="CountryCode">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>CountryCode</mat-header-cell>
-          <mat-cell *matCellDef="let row" >{{row.CountryCode}}</mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="Country">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.Country}}</mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="NewConfirmed">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>NewConfirmed</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.NewConfirmed}}</mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="TotalConfirmed">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>TotalConfirmed</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.TotalConfirmed}}</mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="NewDeaths">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>NewDeaths</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.NewDeaths}}</mat-cell>
-        </ng-container>
-    
-        <ng-container matColumnDef="TotalDeaths">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>TotalDeaths</mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.TotalDeaths}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="NewRecovered">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>NewRecovered</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.NewRecovered}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="TotalRecovered">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>TotalRecovered</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.TotalRecovered}}</mat-cell>
-        </ng-container>
-        
-    
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-        <div class="no-results" *ngIf="countryData.length < 1">
-            No results
-        </div>
-      </mat-table>
-    
-    
-    <mat-paginator  showFirstLastButtons #paginator
-                        [length]="countryData.length"
-                        [pageIndex]="0"
-                        [pageSize]="10"
-                        [pageSizeOptions]="[10, 20, 50, 100]"
-                        >
-    </mat-paginator> 
-</ng-container>

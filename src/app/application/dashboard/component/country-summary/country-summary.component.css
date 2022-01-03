@@ -71,3 +71,8 @@ mat-cell {
 .content {
   position: relative;
 }
+
+mat-header-cell {
+  font-size: 15px;
+  color: indianred;
+}

@@ -1,4 +1,3 @@
-// import { DataSource } from "@angular/cdk/collections";
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -26,7 +25,6 @@ export class CountrySummaryComponent implements OnInit {
   dataSource: any[];
   isLoadingResults = false;
   displayedColumns = [
-    'CountryCode',
     'Country',
     'NewConfirmed',
     'TotalConfirmed',
@@ -35,15 +33,13 @@ export class CountrySummaryComponent implements OnInit {
     'NewRecovered',
     'TotalRecovered',
   ];
-  //@ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   filter = new FormControl();
   total: number;
+  searchRecordFound: boolean;
 
   ngOnInit() {}
-
-  //
   ngAfterViewInit() {
     const getLength = this.filter.valueChanges.pipe(
       startWith(null),
@@ -86,11 +82,22 @@ export class CountrySummaryComponent implements OnInit {
   getElement(filter: string) {
     return !filter
       ? this.countryData
-      : this.countryData.filter((x) => x.Country.indexOf(filter) >= 0);
+      : this.countryData.filter((x) => {
+          const searchStr = (
+            x.Country +
+            x.NewConfirmed +
+            x.TotalConfirmed +
+            x.NewRecovered +
+            x.TotalRecovered +
+            x.NewDeaths +
+            x.TotalDeaths
+          ).toLowerCase();
+          return (this.searchRecordFound =
+            searchStr.indexOf(filter.toLowerCase()) !== -1);
+        });
   }
 
   getLength(filter: string) {
-    console.log('getLength');
     return of(this.getElement(filter).length).pipe(delay(500));
   }
   getData(
@@ -109,9 +116,7 @@ export class CountrySummaryComponent implements OnInit {
         .slice(page * pageSize, (page + 1) * pageSize)
     ).pipe(
       delay(500),
-      tap(() => {
-        console.log(sortField, sortDirection, page);
-      })
+      tap(() => {})
     );
   }
 }
