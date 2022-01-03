@@ -37,7 +37,6 @@ export class CountrySummaryComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   filter = new FormControl();
   total: number;
-  searchRecordFound: boolean;
 
   ngOnInit() {}
   ngAfterViewInit() {
@@ -92,8 +91,7 @@ export class CountrySummaryComponent implements OnInit {
             x.NewDeaths +
             x.TotalDeaths
           ).toLowerCase();
-          return (this.searchRecordFound =
-            searchStr.indexOf(filter.toLowerCase()) !== -1);
+          return searchStr.indexOf(filter.toLowerCase()) !== -1;
         });
   }
 

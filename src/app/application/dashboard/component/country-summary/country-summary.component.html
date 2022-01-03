@@ -84,10 +84,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
 
-  <div class="no-results" *ngIf="countryData.length < 1 || !searchRecordFound">
-    No results
-  </div>
-
+  <div class="no-results" *ngIf="countryData.length < 1">No results</div>
   <mat-paginator
     showFirstLastButtons
     #paginator
