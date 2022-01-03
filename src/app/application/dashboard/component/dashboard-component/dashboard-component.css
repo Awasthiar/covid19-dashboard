@@ -47,31 +47,19 @@
   background: #817c9bb8;
 }
 
-.search {
-  float: left;
-  position: absolute;
-  font-size: 15px;
-  left: 28px;
-  top: 8px;
-}
-
 .loading {
-  position: absolute;
-  z-index: 100;
-}
-
-.loading-shade {
-  position: absolute;
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  margin: auto;
   top: 0;
   left: 0;
-  bottom: 56px;
+  bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.15);
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
 .content {
   position: relative;
 }

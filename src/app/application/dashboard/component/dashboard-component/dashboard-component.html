@@ -8,16 +8,23 @@
       <mat-icon>refresh</mat-icon>
     </button>
   </mat-toolbar>
-  <ng-container>
-    <h3 class="text-red d-inline-block">Global Trend</h3>
-    <div class="row pl-2 pr-2">
-      <global-summary-dashboard
-        class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-4"
-        *ngFor="let summary of globalSummaryArray"
-        [summaryCard]="summary"
-      >
-      </global-summary-dashboard>
+  <h3 class="text-red d-inline-block">Global Trend</h3>
+  <div class="row pl-2 pr-2">
+    <global-summary-dashboard
+      class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-4"
+      *ngFor="let summary of globalSummaryArray"
+      [summaryCard]="summary"
+    >
+    </global-summary-dashboard>
+  </div>
+  <ng-container *ngIf="isLoading">
+    <div class="content">
+      <div>
+        <mat-spinner class="loading"></mat-spinner>
+      </div>
     </div>
+  </ng-container>
+  <ng-container *ngIf="!isLoading">
     <div *ngIf="getCountryData()" class="row mt-1 ml-0 mr-0 pt-4">
       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <h3 class="text-green d-inline-block country">Country Wise Data</h3>
